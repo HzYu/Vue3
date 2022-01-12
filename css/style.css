@@ -1,0 +1,18 @@
+/*表格欄位標題間距*/
+table thead tr th{
+    width: 150px;
+    padding: 10px 0px;
+}
+
+/*表格欄位間距*/
+table tbody tr td{
+    padding: 10px 0px;
+}
+
+/*垂直置中*/
+.center_vertically{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 15px;
+}
