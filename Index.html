@@ -71,13 +71,13 @@
                                 </p>
                                 <p v-else>{{productDetail.price}} <del>{{productDetail.originPrice}}</del> 個/元</p>
                             </div>
-                            <!--商品圖片明細-->
-                            <div style="margin:40px 0px">
-                                <span v-for="(item) in productDetail.imageURL_Detail">
-                                    <img v-bind:src='item' style="height:150px; margin-right:20px"/>
-                                </span>
-                            </div>
                         </div>
+                    </div>
+                    <!--商品圖片明細-->
+                    <div v-if="productDetail.isEnable" style="margin:40px 0px">
+                        <span v-for="(item) in productDetail.imageURL_Detail">
+                            <img v-bind:src='item' style="height:150px; margin-right:20px"/>
+                        </span>
                     </div>
                 </div>
             </div>
