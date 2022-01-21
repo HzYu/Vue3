@@ -1,3 +1,21 @@
+
+/*Login(Start)*/
+body {
+    background-color: #EFEEF3;
+}
+
+/*登入外框調整及樣式*/
+.LoginBox {
+    margin-top: 17%;
+    margin-left: 19%;
+    padding: 5%;
+    width: 65%;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px 6px #cccccc;
+}
+/*Login(End)*/
+
 /*表格欄位標題間距*/
 table thead tr th{
     width: 150px;
