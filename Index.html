@@ -21,16 +21,17 @@
     <body>
         <div id="products" class="container">
             <div class="row py-3">
-                <div  class="col-md-6">
+                <div  class="col-md-12 col-lg-12">
                     <h2>產品列表</h2>
-                    <table class="table-hover mt-4">
+                    <table class="table-hover mt-4" style="width:100%">
                         <thead>
                             <tr style="border-bottom: 2px solid black;">
                                 <th>產品名稱</th>
                                 <th>原價</th>
                                 <th>售價</th>
                                 <th>是否啟用</th>
-                                <th>查看細節</th>
+                                <!-- <th>查看細節</th> -->
+                                <th>編輯</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,27 +49,32 @@
                                     <label class="custom-switch-btn" :for="'isEnable_'+item.id"></label>
                                 </td>
                                 <!--是否啟用Def判斷(End)-->
-                                <td><button v-on:click = "ProductDetail(item.id)" type="button" class="btn btn-primary">查看細節</button></td>
+                                <!-- <td><button v-on:click = "ProductDetail(item.id)" type="button" class="btn btn-primary">查看細節</button></td> -->
+                                <td>
+                                    <span style="padding-right: 10px;"><button v-on:click = "" type="button" class="btn btn-primary">編輯</button></span>
+                                    <span><button v-on:click = "" type="button" class="btn btn-danger">刪除</button></span>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                     <div id="totalProduct" class="mt-4">目前有 {{productsTotal}} 項產品</div>
                 </div>
-                <div class="col-md-6">
+                
+                <!-- <div class="col-md-6">
                     <h2>單一產品細節</h2>
                     <span v-if="!productDetail.is_enabled" style="color: gray;">請選擇一個商品查看</span>
                         <div id="product_Border">
                             <div v-if="productDetail.is_enabled" >
-                            <!--商品圖片-->
+                            商品圖片
                             <div class="center_vertically" >
                                 <img v-bind:src='productDetail.imageUrl' style="height:300px; margin: 0px 20px 20px 20px"/>
                             </div>
-                            <!--商品明細-->
+                            商品明細
                             <div class="m-4" style="justify-content:center;">
                                 <h5>{{productDetail.title}}<span class="badge bg-primary ms-3" style="padding: 0.5em 0.65em;">{{productDetail.category}}</span></h5>
                                 <p v-if="productDetail.description !=null">商品描述：{{productDetail.description}}</p>
                                 <p v-if="productDetail.size !=null">商品內容：尺寸：{{productDetail.size}}</p>
-                                <!--如售價為空，則顯示原價-->
+                                如售價為空，則顯示原價
                                 <p v-if="productDetail.price == '' ||  productDetail.price == null">
                                     {{productDetail.origin_price}}
                                 </p>
@@ -76,13 +82,13 @@
                             </div>
                         </div>
                     </div>
-                    <!--商品圖片明細-->
+                    商品圖片明細
                     <div v-if="productDetail.is_enabled" style="margin:40px 0px">
                         <span v-for="(item) in productDetail.imagesUrl">
                             <img v-bind:src='item' style="height:150px; margin-right:20px"/>
                         </span>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </body>
@@ -108,21 +114,21 @@
         },
         methods:{
             //取得產品明細
-            ProductDetail(productId){
-                this.productDetail = this.productsList[productId] //指定產品明細
+            // ProductDetail(productId){
+            //     this.productDetail = this.productsList[productId] //指定產品明細
                 
-                //取得是否啟用的狀態
-                var isEnable_Element = document.querySelector('#isEnable_' + productId);
-                this.productDetail.is_enabled = isEnable_Element.checked
+            //     //取得是否啟用的狀態
+            //     var isEnable_Element = document.querySelector('#isEnable_' + productId);
+            //     this.productDetail.is_enabled = isEnable_Element.checked
 
-                //查看細節時，新增div邊框
-                var border_Element = document.querySelector('#product_Border');
-                if(this.productDetail.is_enabled){
-                    border_Element.style = "border:1px solid rgba(136, 136, 136, 0.4);";
-                }else{
-                    border_Element.style = "";
-                }
-            },
+            //     //查看細節時，新增div邊框
+            //     var border_Element = document.querySelector('#product_Border');
+            //     if(this.productDetail.is_enabled){
+            //         border_Element.style = "border:1px solid rgba(136, 136, 136, 0.4);";
+            //     }else{
+            //         border_Element.style = "";
+            //     }
+            // },
             GetProductDetail(){
                 axios.get(this.api.baseUrl + this.api.apiPath + this.api.apiUrl)
                 .then((res) => {
@@ -141,6 +147,7 @@
 
                 axios.post(this.api.baseUrl + this.api.signCheck)
                 .then((res) => {
+                    console.log(token);
                     this.GetProductDetail(); //取得全部產品項目
                 })
                 .catch((err) => {
