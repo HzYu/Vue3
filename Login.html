@@ -28,7 +28,7 @@
                         <input type="text" class="form-control" id="email" placeholder="Email address"  style="margin-bottom: 10%;">
                         <input type="password" class="form-control" id="pwd" placeholder="Password"  style="margin-bottom: 15%;">
                         <div class="center_vertically">
-                            <button button type="button" class="btn btn-secondary" style="padding: .375rem 7.5rem;" v-bind:click = "Login()">Login</button> 
+                            <button button type="button" class="btn btn-secondary" style="padding: .375rem 7.5rem;" :click ="Login()">Login</button> 
                         </div>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                             document.cookie =`hexToken=${token}; expires=${new Date(expired)}`;
                             window.location = 'Index.html';
                         }else{
-                            alert(res.statusText);
+                            alert(res.response.data.message);
                         }
                     })
                     .catch((err) => {
